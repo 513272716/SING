@@ -2,179 +2,143 @@
 <html>
 <head>
 <meta charset="utf-8">
-
-
-
-
 <style type="text/css">
-
-#d1
-{
-		border:1px solid #000000;	
+	#d1
+	{
 		margin:0 0 0 0;			/*边距*/
-}
-#b1
-{
-			margin:0 0 0 0;			/*边距*/
-			
-}
-
-
-		#d2{
-
-			height:20px;
-
-			display:inline-block;
-		}
-
+	}
+	#b1
+	{
+		margin:0 0 0 0;			/*边距*/		
+	}
+	#d2
+	{
+		height:20px;
+		display:inline-block;
+	}
 </style>
-
-
-
-
-
-
 <script type="text/javascript">
 	
+	//大小数据
 	var neiHeight = document.documentElement.clientHeight;//高
 	var neiWidth = document.documentElement.clientWidth;//宽
-
-	var d_height = neiHeight/2;
+	var n_width = neiWidth/6;
+	var b_width = n_width/11;
+	var n_Height = neiHeight/3;
+	//	alert(n_width);
 	
-			window.onload=function()
-			{							
-				document.body.bgColor="#FFCCFF";	
-
-				//	alert(neiWidth);
-		
-				//上边框
-				var d1 = document.getElementById("d1");
-				d1.style.height= d_height+"px";
-				
-				
-				
-				//大小数据
-				var n_width = neiWidth/6;
-				var b_width = n_width/11;
-				var n_Height = neiHeight/3;
-				//	alert(n_width);
-				
-				
-				
-				
-								//修改第一个div
-					var d2 = document.getElementById("d2");	
-						d2.style.width=b_width+"px";
-				
-				
-				//定位
-				
-				
-				
-				//内框
-				
-				for(i=0;i<5;++i)
-				{
-
-					//创建一个div
-					var divobj=document.createElement('div');	
-			
-					divobj.style.border="1px solid red";
-					divobj.style.width=n_width+"px";
-					divobj.style.height=n_Height+"px";
-					divobj.style.float="left";
-					divobj.style.margin=b_width+"px";			
-			//	divobj.style.padding="70px";			
-			
-					divobj.setAttribute("id","div"+i);
-					divobj.setAttribute("ondrop","drop(event,"+i+")");
-					divobj.setAttribute("ondragover","allowDrop(event)");	
-			
-					//放到哪里
-					var obj = document.getElementById("d1");
-			
-					//将div添加到页面中
-					obj.appendChild(divobj);			
-				}
-		
-
-		
-		
-		
-				//移动图
-				
-		
-		
-				for(t=0;t<5;++t)
-				{
-					//创建一个img
-					var imgObj = document.createElement("img");
+	window.onload=function()
+	{			
+		//背景色				
+		document.body.bgColor="#FFCCFF";	
+		//定位，外边框
+		waikuang();
+		//第一个div
+		d_div();
+		//内框	
+		neikuang();	
+		//定位
+		yidong();	
 					
-					imgObj.setAttribute("src",t+".jpg");			
-					imgObj.setAttribute("width",n_width);		
-					imgObj.setAttribute("height",n_Height);
-					imgObj.setAttribute("draggable","true");
-					imgObj.setAttribute("ondragstart","drag(event)");
-					imgObj.setAttribute("id","drag"+t);		
-					document.body.appendChild(imgObj);	
-					
-					var dingwei = document.createElement("div");
-dingwei.style.width=	2*(b_width)+"px";
-					dingwei.setAttribute("id","d2");	
-					dingwei.setAttribute("display","inline-block");		
-					document.body.appendChild(dingwei);	
-					
-				}
+	}	
 
-					
-			}
-	
+//修改第一个div
+function d_div()
+{
+	var d2 = document.getElementById("d2");	
+	d2.style.width=b_width+"px";
+}		
 
-	
-	
+//内框
+
+function neikuang()
+{
+	for(i=0;i<5;++i)
+	{
+		//创建一个div
+		var divobj=document.createElement('div');	
+			
+		divobj.style.border="1px solid red";
+		divobj.style.width=n_width+"px";
+		divobj.style.height=n_Height+"px";
+		divobj.style.float="left";
+		divobj.style.margin=b_width+"px";					
+		divobj.setAttribute("id","div"+i);
+		divobj.setAttribute("ondrop","drop(event,"+i+")");
+		divobj.setAttribute("ondragover","allowDrop(event)");		
+		//放到哪里
+		var obj = document.getElementById("d1");
+		//将div添加到页面中
+		obj.appendChild(divobj);			
+	}	
+}
+
+//移动图
+				
+function yidong()	
+{
+	for(t=0;t<5;++t)
+	{
+		//创建一个img
+		var imgObj = document.createElement("img");
+					
+		imgObj.setAttribute("src",t+".jpg");			
+		imgObj.setAttribute("width",n_width);		
+		imgObj.setAttribute("height",n_Height);
+		imgObj.setAttribute("draggable","true");
+		imgObj.setAttribute("ondragstart","drag(event)");
+		imgObj.setAttribute("id","drag"+t);		
+		document.body.appendChild(imgObj);	
+					
+		var dingwei = document.createElement("div");
+		dingwei.style.width=	2*(b_width)+"px";
+		dingwei.setAttribute("id","d2");	
+		dingwei.setAttribute("display","inline-block");	
+		document.body.appendChild(dingwei);						
+	}	
+}
+				
+//上边框
+	function waikuang()
+	{
+		var d_height = neiHeight/2;		
+		var d1 = document.getElementById("d1");
+		d1.style.height= d_height+"px";	
+	}
+
 //真不知道干啥
-	
+
 function allowDrop(ev)
 {
-ev.preventDefault();
+	ev.preventDefault();
 }
 
 
 //开始拖动元素执行
+
 function drag(ev)
 {
-ev.dataTransfer.setData("Text",ev.target.id);
-    document.getElementById("demo").innerHTML = "开始拖动 p 元素";
+	ev.dataTransfer.setData("Text",ev.target.id);
+   document.getElementById("demo").innerHTML = "开始拖动 p 元素";
 }
 
 //拖动结束
+
 function drop(ev,div)
 {
-ev.preventDefault();//取消事件的默认动作
-//data 是当前照片的ID
-var data=ev.dataTransfer.getData("Text");
-ev.target.appendChild(document.getElementById(data));
-var aa=div;
-document.getElementById("demo").innerHTML = "p 元素已被拖动 "+data+" "+aa;	
+	ev.preventDefault();//取消事件的默认动作
+	var data=ev.dataTransfer.getData("Text");	//data 是当前照片的ID
+	ev.target.appendChild(document.getElementById(data));
+	var aa=div;
+	document.getElementById("demo").innerHTML = "p 元素已被拖动 "+data+" "+aa;	
 }
-
-
-
-
-
 </script>
 </head>
 <body id="b1">
-
 <br/>
 <div id="d1">
 	<p id="demo">11</p>
 </div>
 <div id="d2"></div>
-<!--
-	<img src="A.gif" draggable="true" ondragstart="drag(event)" id="drag1" />
-	<img src="B.gif" draggable="true" ondragstart="drag(event)" id="drag2" />
-	-->
-<!--  ondrop="drop(event)"  在可拖动元素放置在 <div> 元素中时执行 JavaScript:-->
 </body>
 </html>
