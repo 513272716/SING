@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+
+
+<style type="text/css">
+
+#d1
+{
+		border:1px solid #000000;	
+		margin:0 0 0 0;			/*边距*/
+}
+#b1
+{
+			margin:0 0 0 0;			/*边距*/
+}
+</style>
+
+
+
+
+
+
+
+<script type="text/javascript">
+	
+	var neiHeight = document.documentElement.clientHeight;//高
+	var neiWidth = document.documentElement.clientWidth;//宽
+
+	var d_height = neiHeight/2;
+	
+			window.onload=function(){			
+						
+			document.body.bgColor="#FFCCFF";	
+			
+			
+
+		//	alert(neiWidth);
+		
+		//上边框
+		var d1 = document.getElementById("d1");
+		d1.style.height= d_height+"px";
+		
+		
+		//内框
+		
+		var n_width = neiWidth/6;
+		var b_width = n_width/11;
+		var n_Height = neiHeight/3;
+			//	alert(n_width);
+				
+		for(i=0;i<5;++i)
+		{
+
+			//创建一个div
+			var divobj=document.createElement('div');	
+			
+			divobj.style.border="1px solid red";
+			divobj.style.width=n_width+"px";
+			divobj.style.height=n_Height+"px";
+			divobj.style.float="left";
+			divobj.style.margin=b_width+"px";			
+		//	divobj.style.padding="70px";			
+			
+			divobj.setAttribute("id","div"+i);
+			divobj.setAttribute("ondrop","drop(event,"+i+")");
+			divobj.setAttribute("ondragover","allowDrop(event)");	
+			
+			//放到哪里
+			var obj = document.getElementById("d1");
+			
+			//将div添加到页面中
+			obj.appendChild(divobj);
+			//样式
+			
+
+		}
+		
+
+			
+			
+			
+		}
+	
+	
+	/*
+				imgObj.setAttribute("src","./img/"+bian+".jpg");
+				imgObj.setAttribute("onclick","removeImg2(this)");			
+				imgObj.setAttribute("width",230);		
+				imgObj.setAttribute("height",300);				
+				var x = getRandom(0,neiWidth);
+				var y = getRandom(50,neiHeight);
+				imgObj.setAttribute("style","position:absolute;left:"+x+"px;top:"+y+"px");
+	
+	*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//真不知道干啥
+	
+function allowDrop(ev)
+{
+ev.preventDefault();
+}
+
+
+//开始拖动元素执行
+function drag(ev)
+{
+ev.dataTransfer.setData("Text",ev.target.id);
+    document.getElementById("demo").innerHTML = "开始拖动 p 元素";
+}
+
+//拖动结束
+function drop(ev,div)
+{
+ev.preventDefault();//取消事件的默认动作
+//data 是当前照片的ID
+var data=ev.dataTransfer.getData("Text");
+ev.target.appendChild(document.getElementById(data));
+var aa=div;
+document.getElementById("demo").innerHTML = "p 元素已被拖动 "+data+" "+aa;	
+}
+
+
+
+
+
+</script>
+</head>
+<body id="b1">
+
+<br/>
+<div id="d1">
+	<p id="demo">11</p>
+	<!--
+	<div id="div1" ondrop="drop(event,'div1')" ondragover="allowDrop(event)"></div>
+	<div id="div2" ondrop="drop(event,'div2')" ondragover="allowDrop(event)"></div>
+	<div id="div3" ondrop="drop(event,'div3')" ondragover="allowDrop(event)"></div>
+	<div id="div4" ondrop="drop(event,'div4')" ondragover="allowDrop(event)"></div>
+	<div id="div5" ondrop="drop(event,'div4')" ondragover="allowDrop(event)"></div>
+	-->
+</div>
+
+	<img src="A.gif" draggable="true" ondragstart="drag(event)" id="drag1" />
+	<img src="B.gif" draggable="true" ondragstart="drag(event)" id="drag2" />
+<!--  ondrop="drop(event)"  在可拖动元素放置在 <div> 元素中时执行 JavaScript:-->
+
+
+</body>
+</html>
