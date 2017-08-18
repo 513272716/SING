@@ -32,78 +32,70 @@
 
 	var d_height = neiHeight/2;
 	
-			window.onload=function(){			
-						
-			document.body.bgColor="#FFCCFF";	
-			
-			
+			window.onload=function()
+			{							
+				document.body.bgColor="#FFCCFF";	
 
-		//	alert(neiWidth);
+				//	alert(neiWidth);
 		
-		//上边框
-		var d1 = document.getElementById("d1");
-		d1.style.height= d_height+"px";
+				//上边框
+				var d1 = document.getElementById("d1");
+				d1.style.height= d_height+"px";
 		
 		
-		//内框
+				//内框
 		
-		var n_width = neiWidth/6;
-		var b_width = n_width/11;
-		var n_Height = neiHeight/3;
-			//	alert(n_width);
+				var n_width = neiWidth/6;
+				var b_width = n_width/11;
+				var n_Height = neiHeight/3;
+				//	alert(n_width);
+				for(i=0;i<5;++i)
+				{
+
+					//创建一个div
+					var divobj=document.createElement('div');	
+			
+					divobj.style.border="1px solid red";
+					divobj.style.width=n_width+"px";
+					divobj.style.height=n_Height+"px";
+					divobj.style.float="left";
+					divobj.style.margin=b_width+"px";			
+			//	divobj.style.padding="70px";			
+			
+					divobj.setAttribute("id","div"+i);
+					divobj.setAttribute("ondrop","drop(event,"+i+")");
+					divobj.setAttribute("ondragover","allowDrop(event)");	
+			
+					//放到哪里
+					var obj = document.getElementById("d1");
+			
+					//将div添加到页面中
+					obj.appendChild(divobj);			
+				}
+		
+				//移动图
 				
-		for(i=0;i<5;++i)
-		{
-
-			//创建一个div
-			var divobj=document.createElement('div');	
-			
-			divobj.style.border="1px solid red";
-			divobj.style.width=n_width+"px";
-			divobj.style.height=n_Height+"px";
-			divobj.style.float="left";
-			divobj.style.margin=b_width+"px";			
-		//	divobj.style.padding="70px";			
-			
-			divobj.setAttribute("id","div"+i);
-			divobj.setAttribute("ondrop","drop(event,"+i+")");
-			divobj.setAttribute("ondragover","allowDrop(event)");	
-			
-			//放到哪里
-			var obj = document.getElementById("d1");
-			
-			//将div添加到页面中
-			obj.appendChild(divobj);
-			//样式
-			
-
-		}
+				var b1 = document.getElementById("b1");
 		
+		
+				for(t=0;t<2;++t)
+				{
+					//创建一个img
+					var imgObj = document.createElement("img");
+					
+					imgObj.setAttribute("src",t+".jpg");			
+					imgObj.setAttribute("width",n_width);		
+					imgObj.setAttribute("height",n_Height);
+					imgObj.setAttribute("draggable","true");
+					imgObj.setAttribute("ondragstart","drag(event)");
+					imgObj.setAttribute("id","drag"+t);		
+					document.body.appendChild(imgObj);	
+				}
 
-			
-			
-			
-		}
+					
+			}
 	
-	
-	/*
-				imgObj.setAttribute("src","./img/"+bian+".jpg");
-				imgObj.setAttribute("onclick","removeImg2(this)");			
-				imgObj.setAttribute("width",230);		
-				imgObj.setAttribute("height",300);				
-				var x = getRandom(0,neiWidth);
-				var y = getRandom(50,neiHeight);
-				imgObj.setAttribute("style","position:absolute;left:"+x+"px;top:"+y+"px");
-	
-	*/
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 //真不知道干啥
@@ -143,19 +135,11 @@ document.getElementById("demo").innerHTML = "p 元素已被拖动 "+data+" "+aa;
 <br/>
 <div id="d1">
 	<p id="demo">11</p>
-	<!--
-	<div id="div1" ondrop="drop(event,'div1')" ondragover="allowDrop(event)"></div>
-	<div id="div2" ondrop="drop(event,'div2')" ondragover="allowDrop(event)"></div>
-	<div id="div3" ondrop="drop(event,'div3')" ondragover="allowDrop(event)"></div>
-	<div id="div4" ondrop="drop(event,'div4')" ondragover="allowDrop(event)"></div>
-	<div id="div5" ondrop="drop(event,'div4')" ondragover="allowDrop(event)"></div>
-	-->
 </div>
-
+<!--
 	<img src="A.gif" draggable="true" ondragstart="drag(event)" id="drag1" />
 	<img src="B.gif" draggable="true" ondragstart="drag(event)" id="drag2" />
+	-->
 <!--  ondrop="drop(event)"  在可拖动元素放置在 <div> 元素中时执行 JavaScript:-->
-
-
 </body>
 </html>
