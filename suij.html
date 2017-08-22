@@ -3,15 +3,12 @@
 <head>
 <meta charset="utf-8">
 <style type="text/css">
-	
 	p
 	{
 		display:inline-block;
-	}
-				
+	}		
 </style>
 <script>
-	
 	function suiji()
 	{
 		//获得值
@@ -27,28 +24,25 @@
 		//输出值
 		document.getElementById("p3").innerHTML =jieguo;
 	}
-	
-	
+
 	function jisuan(min,max)
 	{
 		if(min==max)
 		{
 			return "不能为 空 或者是 两个相同的数 ";
 		}
-		else if(!(min>0&&max>0))
+		else if(min>max)
 		{		
-			return "暂时只能支持正数";
+			return "最小值不能大于最大值";
 		}
 		else
 		{
-			var jieguo=min+max;
-			return jieguo;	
+			max=max+1;
+			var random = Math.random()*(max-min)+min;
+			random = Math.floor(random);
+			return random;		
 		}
 	}
-	
-	
-
-	
 </script>
 </head>
 <body>
