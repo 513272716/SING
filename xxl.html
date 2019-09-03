@@ -89,8 +89,9 @@
 			}
 			function preLoadImg(index,url) { 
 				var img = new Image(); 
-				img.src = url; 
+				
         			img.load=loadingAnimation(index,16);
+				img.src = url; 
 			} 	
 			document.body.bgColor="#FFCCFF";
 			setTimeout("Initialization()","2000");
