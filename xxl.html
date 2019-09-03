@@ -90,7 +90,7 @@
 			function preLoadImg(index,url) { 
 				var img = new Image(); 
 				img.src = url; 
-        			img.onended=loadingAnimation(index,16);
+        			img.load=loadingAnimation(index,16);
 			} 	
 			document.body.bgColor="#FFCCFF";
 			setTimeout("Initialization()","2000");
