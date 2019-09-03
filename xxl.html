@@ -83,14 +83,14 @@
 		var neiWidth = document.documentElement.clientWidth-235;
 
 		window.onload=function(){				
-			for(i=1;i<=17;i++){
+			for(i=1;i<=16;i++){
 				var url="/SING/img/"+i+".jpg";
 				preLoadImg(i,url);
 			}
 			function preLoadImg(index,url) { 
 				var img = new Image(); 
 				img.src = url; 
-        			img.onended=loadingAnimation(index,17);
+        			img.onended=loadingAnimation(index,16);
 			} 	
 			document.body.bgColor="#FFCCFF";
 			setTimeout("Initialization()","2000");
