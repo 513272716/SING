@@ -15,6 +15,47 @@
 			background:yellow;
 			height:20px;
 		}
+		.loading
+		{
+			height:100%;
+			width:100%;
+			background:#FFFFFF;
+			z-index:1000;
+		}
+		.guanggao
+		{
+			height:80%;
+			width:100%;
+		}
+		.progress_div
+		{
+			top:80%;
+			height:20%;
+			width:100%;
+		}
+		.progress_div b
+		{
+			margin-left:45%;
+		}
+		.progress_div_1
+		{
+			width:70%;
+			height:20%;
+			margin-left:15%;
+			margin-top:5%;
+		}
+		.progress_div_2
+		{
+			width:70%;
+			height:20%;
+			margin-left:15%;
+			margin-top:2%;
+		}
+		.progress
+		{
+			width:100%;
+			height:100%;
+		}
 	</style>
 	<script type="text/javascript">
 		var dingshiqi;				
@@ -28,13 +69,28 @@
 		window.onload=function(){				
 			for(i=1;i<=17;i++){
 				var url="/SING/img/"+i+".jpg";
-				preLoadImg(url);
+				preLoadImg(i,url);
 			}
-			function preLoadImg(url) { 
+			function preLoadImg(index,url) { 
 				var img = new Image(); 
 				img.src = url; 
+        			img.onended=loadingAnimation(index,17);
 			} 	
-			document.body.bgColor="#FFCCFF";	
+			document.body.bgColor="#FFCCFF";
+			setTimeout("Initialization()","2000");
+		}
+    		function Initialization()
+    		{
+			//撤除阻挡
+			document.getElementById('loading').style.display='none';
+		}
+		//动画
+		function loadingAnimation(schedule,length)
+		{
+			schedule=schedule*1;
+			var value=parseInt((schedule*100)/length);
+			document.getElementById('pg').value=value;
+			document.getElementById('progress_b').innerHTML=value+"%";
 		}
 		function startGame(moshi){
 			var moshi = Number(moshi);
@@ -139,6 +195,18 @@
 	</script>
 </head>	
 <body>
+<div class="loading" id="loading">
+	<div class="guanggao"></div>
+	<div class="progress_div">
+		<div class="progress_div_1">
+			<progress class="progress" max="100" value="0" id="pg"></progress>
+		</div>
+		<div class="progress_div_2">
+			<b id="progress_b">0%</b>
+		</div>
+
+	</div>
+</div>
 	<input type="button"  value="开始游戏(青铜模式)" onclick="startGame(0)"></input>
 	<input type="button"  value="开始游戏(荣耀模式)" onclick="startGame(1)"></input>
 	<input type="button"  value="暂停游戏" onclick="zanTing()"></input>
