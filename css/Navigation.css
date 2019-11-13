@@ -1,0 +1,55 @@
+html
+{
+	height:100%;
+}
+body
+{
+	height:100%;	
+}
+img
+{
+	height:100%;	
+	width:100%;	
+}
+.column
+{
+	height:100%;
+    padding-left:0px;
+    padding-right:0px;  
+}
+.container
+{
+    padding-left:0px;
+    padding-right:0px; 
+	height:100%;
+}
+.row
+{
+    padding-left:0px;
+    padding-right:0px;  
+}
+h4
+{
+	margin-top:-55%;
+	margin-left:-0%;	
+
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+}
+h2
+{
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+
+	color:red;
+
+text-shadow:#C6DBF0 1px 0 0,#C6DBF0 0 1px 0,#C6DBF0 -1px 0 0,#C6DBF0 0 -1px 0;
+
+-webkit-text-shadow:#C6DBF0 1px 0 0,#C6DBF0 0 1px 0,#C6DBF0 -1px 0 0,#C6DBF0 0 -1px 0;
+
+-moz-text-shadow:#C6DBF0 1px 0 0,#C6DBF0 0 1px 0,#C6DBF0 -1px 0 0,#C6DBF0 0 -1px 0;
+
+*filter: Glow(color=#C6DBF0, strength=3);	
+}
