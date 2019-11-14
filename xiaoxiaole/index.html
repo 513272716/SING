@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>崩图消消乐</title>
+	<style type="text/css">
+		html
+		{
+			height:100%;
+			width:100%;
+			margin:0;
+			padding:0;
+			font-size:1.0em;
+		}
+		body
+		{
+			height:100%;
+			width:100%;	
+			margin:0;
+			padding:0;
+			overflow: hidden;
+		}
+		#id2{
+			width:100px;
+			height:20px;
+			border:1px solid red;	
+			display:inline-block;
+		}
+		#id3{
+			display:inline-block;
+			background:yellow;
+			height:20px;
+		}
+		.loading
+		{
+			height:100%;
+			width:100%;
+			background:#FFFFFF;
+			z-index:1000;
+		}
+		.guanggao
+		{
+			height:80%;
+			width:100%;
+		}
+		.progress_div
+		{
+			top:80%;
+			height:20%;
+			width:100%;
+		}
+		.progress_div b
+		{
+			margin-left:45%;
+		}
+		.progress_div_1
+		{
+			width:70%;
+			height:20%;
+			margin-left:15%;
+			margin-top:5%;
+		}
+		.progress_div_2
+		{
+			width:70%;
+			height:20%;
+			margin-left:15%;
+			margin-top:2%;
+		}
+		.progress
+		{
+			width:100%;
+			height:100%;
+		}
+	</style>
+	<script type="text/javascript">
+		var dingshiqi;				
+		var sj;
+		var huaiTu=0;
+		var n =0;
+		var dayao=4;
+		var neiHeight = document.documentElement.clientHeight-305;
+		var neiWidth = document.documentElement.clientWidth-235;
+
+		window.onload=function(){				
+			for(i=1;i<=16;i++){
+				var url="img/"+i+".jpg";
+				preLoadImg(i,url);
+			}
+			function preLoadImg(index,url) { 
+				var img = new Image(); 
+				
+        			img.onload=loadingAnimation(index,16);
+				img.src = url; 
+			} 	
+			document.body.bgColor="#FFCCFF";
+			setTimeout("Initialization()","2000");
+		}
+    		function Initialization()
+    		{
+			//撤除阻挡
+			document.getElementById('loading').style.display='none';
+		}
+		//动画
+		function loadingAnimation(schedule,length)
+		{
+			schedule=schedule*1;
+			var value=parseInt((schedule*100)/length);
+			document.getElementById('pg').value=value;
+			document.getElementById('progress_b').innerHTML=value+"%";
+		}
+		function startGame(moshi){
+			var moshi = Number(moshi);
+			var nandu=600;
+			if(moshi==0){
+				nandu=1200;
+			}
+			else{
+			}
+			window.clearInterval(sj);
+			window.clearInterval(dingshiqi);
+			sj=window.setInterval("shijian()",1000);
+			dingshiqi=window.setInterval("star()",nandu);
+		}
+		function star(){
+			var imgObj = document.createElement("img");
+			var bian = getRandom(1,17);
+			bian = +bian;
+			if(bian == 16){							
+				imgObj.setAttribute("src","./img/"+bian+".jpg");			
+				imgObj.setAttribute("onclick","removeImg1(this)");
+				huaiTu++;						
+				imgObj.setAttribute("width",document.documentElement.clientWidth-1);		
+				imgObj.setAttribute("height",document.documentElement.clientHeight-60);	
+				imgObj.setAttribute("style","position:absolute;left:0px;top:47px");
+			}
+			else if(bian <= 8){		
+				imgObj.setAttribute("src","./img/"+bian+".jpg");
+				imgObj.setAttribute("onclick","removeImg2(this)");			
+				imgObj.setAttribute("width",230);		
+				imgObj.setAttribute("height",300);				
+				var x = getRandom(0,neiWidth);
+				var y = getRandom(50,neiHeight);
+				imgObj.setAttribute("style","position:absolute;left:"+x+"px;top:"+y+"px");
+			}
+			else{				
+				imgObj.setAttribute("src","./img/"+bian+".jpg");			imgObj.setAttribute("onclick","removeImg(this)");
+				huaiTu++;				
+				imgObj.setAttribute("width",230);		
+				imgObj.setAttribute("height",300);					
+				var x = getRandom(0,neiWidth);
+				var y = getRandom(50,neiHeight);
+				imgObj.setAttribute("style","position:absolute;left:"+x+"px;top:"+y+"px");
+			}		
+			var jd = document.getElementById("id3");
+			jd.style.width=huaiTu*20+"px";
+			var zs = document.getElementById("id4");
+			zs.innerHTML=huaiTu+"张";
+			if(huaiTu>=5){
+				alert("崩图太多了,游戏失败");
+				window.clearInterval(dingshiqi);
+				location.reload();
+			}			
+			document.body.appendChild(imgObj);
+		}
+	
+		function getRandom(min,max){
+			var random = Math.random()*(max-min)+min;
+			random = Math.floor(random);
+			return random;		
+		}
+
+		function removeImg(aa){
+			huaiTu--;
+			var jd = document.getElementById("id3");
+			var zs = document.getElementById("id4");
+			zs.innerHTML=huaiTu+"张";
+			jd.style.width=huaiTu*20+"px";	
+			document.body.removeChild(aa);
+		}
+
+		function removeImg1(aa){
+			if(dayao!=0){
+				dayao--;
+			}
+			else{
+				dayao =4;
+				huaiTu--;
+				var jd = document.getElementById("id3");
+				var zs = document.getElementById("id4");
+				zs.innerHTML=huaiTu+"张";
+				jd.style.width=huaiTu*20+"px";
+				document.body.removeChild(aa);
+			}
+		}
+		
+		function removeImg2(aa){
+			alert("这不是崩图,游戏失败");
+			window.clearInterval(dingshiqi);
+			location.reload();
+		}
+		
+		function zanTing(){
+			alert("暂停游戏");
+		}
+		
+		function shijian(){
+			n++;
+			var obj = document.getElementById("id1");
+			obj.innerHTML="游行进行了"+n+"秒";
+		}
+	</script>
+</head>	
+<body>
+<div class="loading" id="loading">
+	<div class="guanggao"></div>
+	<div class="progress_div">
+		<div class="progress_div_1">
+			<progress class="progress" max="100" value="0" id="pg"></progress>
+		</div>
+		<div class="progress_div_2">
+			<b id="progress_b">0%</b>
+		</div>
+
+	</div>
+</div>
+	<input type="button"  value="开始游戏(青铜模式)" onclick="startGame(0)"></input>
+	<input type="button"  value="开始游戏(荣耀模式)" onclick="startGame(1)"></input>
+	<input type="button"  value="暂停游戏" onclick="zanTing()"></input>
+	<span id="id1">游戏进行了0秒</span>
+	<span id="id2"><span id="id3"></span></span>
+	<span id="id4">0张</span>
+</body>
+</html> 
